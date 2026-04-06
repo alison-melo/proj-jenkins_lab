@@ -24,7 +24,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'sleep 5'
-        sh 'curl -f http://localhost:8081'
+        sh 'curl -f http://static-web:80'
       }
     }
   }
