@@ -17,7 +17,7 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        sh 'docker run -d -p 8081:80 --name static-web static-web:${BUILD_NUMBER}'
+        sh 'docker run -d -p 8081:80 --name --network jenkins_default static-web static-web:${BUILD_NUMBER}'
       }
     }
 
