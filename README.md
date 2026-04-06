@@ -1,113 +1,22 @@
-# 🚀 Projeto Jenkins + Docker CI/CD
+# 🚀 Jenkins & Docker: Pipeline CI/CD Automatizado
 
-Este projeto demonstra a implementação de um pipeline de **Integração Contínua e Deploy Automatizado** utilizando Jenkins, Docker e GitHub.
-
----
-
-## 📌 Objetivo
-
-Automatizar o processo de:
-
-* Build da aplicação
-* Criação de containers
-* Subida do ambiente automaticamente
-
-Tudo isso a partir de um simples `git push`.
+Este repositório contém a implementação de um pipeline de Integração Contínua (CI) e Deploy Contínuo (CD) para uma aplicação web estática baseada em Nginx. O foco principal deste projeto é demonstrar a automação completa do ciclo de vida de um container, desde o commit até o teste de disponibilidade.
 
 ---
 
-## 🧱 Tecnologias utilizadas
+## 📌 Objetivo do Projeto
 
-* 🐳 Docker
-* 📦 Docker Compose
-* 🔧 Jenkins
-* 🌐 GitHub
-* 💻 Linux
+Automatizar o build, o gerenciamento de containers e o teste de saúde (healthcheck) de uma aplicação sempre que houver uma alteração no código-fonte via `git push`.
 
 ---
 
-## ⚙️ Arquitetura
+## 🏗️ Arquitetura e Fluxo
 
-```text
-GitHub → Jenkins → Docker Compose → Aplicação rodando
-```
-
----
-
-## 🔄 Fluxo do Pipeline
-
-1. Alteração no código
-2. `git push`
-3. Jenkins detecta mudança (Poll SCM)
-4. Pipeline executa:
-
-   * Checkout
-   * Build
-   * Deploy
-
----
-
-## 🛠️ Pipeline (Jenkinsfile)
-
-O pipeline está definido como código no arquivo:
-
-```bash
-Jenkinsfile
-```
-
----
-
-## ▶️ Como executar localmente
-
-### Subir aplicação
-
-```bash
-docker-compose up -d
-```
-
----
-
-## 🤖 Execução automatizada (CI/CD)
-
-Trigger configurado:
-
-```bash
-Poll SCM (H/5 * * * *)
-```
-
----
-
-## 📁 Estrutura do projeto
-
-```text
-.
-├── Jenkinsfile
-├── docker-compose.yml
-├── Dockerfile
-└── app/
-```
-
----
-
-## 💡 Aprendizados
-
-* CI/CD na prática
-* Infraestrutura como código
-* Automação com Jenkins
-* Containers com Docker
-
----
-
-## 🚀 Próximos passos
-
-* [ ] Deploy em nuvem
-* [ ] Webhook no lugar de Poll SCM
-* [ ] Testes automatizados
-
----
-
-## 👨‍💻 Autor
-
-Alison Melo
-https://github.com/alison-melo
-
+```mermaid
+graph LR
+    A[Desenvolvedor] -- git push --> B[GitHub]
+    B -- Poll SCM --> C[Jenkins Container]
+    C -- Docker Socket --> D[Docker Host]
+    D -- Build/Run --> E[App Container]
+    E -- Port 8081 --> F[Acesso Web]
+    C -- Curl Test --> E
