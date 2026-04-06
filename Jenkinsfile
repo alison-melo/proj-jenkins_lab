@@ -3,12 +3,6 @@ pipeline {
 
   stages {
 
-    stage('Checkout') {
-      steps {
-        git branch: 'main', url: 'https://github.com/alison-melo/proj-jenkins_lab.git'
-      }
-    }
-
     stage('Build') {
       steps {
         sh 'docker build -t static-web:${BUILD_NUMBER} .'
